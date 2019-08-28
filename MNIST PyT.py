@@ -1,6 +1,3 @@
-# Source: https://nextjournal.com/gkoehler/pytorch-mnist
-## Changing variables when learning something can be risky!
-
 import torch as th
 import torchvision as tvn
 import matplotlib.pyplot as plt
