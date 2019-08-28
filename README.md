@@ -1,1 +1,1 @@
-# Neural-Network-Optimization-Models-Vector-Ins
+# Neural Network Optimization Models
