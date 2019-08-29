@@ -1,3 +1,6 @@
+# Written by Dr.Pascal Frederich and later modified.
+# From the Aspuru-Guzik Group, University of Toronto.
+
 import os
 import yaml
 
