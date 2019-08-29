@@ -1,4 +1,7 @@
 #!/usr/bin/env python 
+# Written by Dr. Pascal Frederich and later modified.
+# From the Aspuru-Guzik Group, University of Toronto.
+
 
 __author__ = 'Florian Hase'
 
