@@ -38,7 +38,6 @@ for i in range(0,6):
     plt.subplot(2,3, i+1)
     plt.tight_layout()
     plt.imshow(np.transpose(npimg)) 
-    plt.title("Ground Truth: {}".format(classes[labels[j]]))
 plt.show()
 
 
