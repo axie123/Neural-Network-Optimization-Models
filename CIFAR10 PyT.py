@@ -144,13 +144,12 @@ def test():
             100. * correct / len(test_load.dataset)))
     return [output, truth, 'testing']
 
-
 test()
 for i in range(1,2):
     train(i)
     test()
 
-'''
+
 # Evaluating performance ===================================================================================================================================
 
 dataiter = enumerate(test_load)
@@ -203,104 +202,3 @@ with torch.no_grad(): # Sets all data to not require a gradient.
 
 for i in range(10):
     print('Accuracy of %5s : %2d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
-'''
-
-def layer_visuals(layer_num,data_results,ith):
-    if data_results[2] == 'training':
-        chosen_layer = data_results[0][layer_num]
-        print(chosen_layer.shape)
-        base = input('Base: \n')
-        height = input('Height: \n')
-        fig = plt.figure(figsize=(10,2))
-        for i in range(ith,ith+5):
-            image = chosen_layer[i].view(int(base),int(height))
-            for j in range(5):
-                plt.subplot(1,5,j + 1)
-                plt.imshow(image.detach(), cmap = 'gray', interpolation = 'none')
-                plt.xticks([])
-                plt.yticks([])
-        plt.show()
-    elif data_results[2] == 'testing':
-        chosen_layer = data_results[0][layer_num]
-        print(chosen_layer.shape)
-        base = input('Base: \n')
-        height = input('Height: \n')
-        fig = plt.figure(figsize=(10,2))
-        for i in range(ith,ith+5):
-            image = chosen_layer[i].view(int(base),int(height))
-            for j in range(5):
-                plt.subplot(1,5,j + 1)
-                plt.imshow(image.detach(), cmap = 'gray', interpolation = 'none')
-                plt.xticks([])
-                plt.yticks([])
-        plt.show()
-
-def layer_loss_analysis(layer_num,data_results):
-    if data_results[2] == 'training':
-        chosen_layer = data_results[0][layer_num]
-        layer = criterion(chosen_layer, dim=1)
-        loss = criterion(layer, data_results[1])
-        print('Layer Number: {}, Loss: {:.6f}\n'.format(layer_num, loss)) 
-    if data_results[2] == 'testing':
-        chosen_layer = data_results[0][layer_num]
-        layer = criterion(chosen_layer, dim=1)
-        loss = criterion(layer, data_results[1])
-        print('Layer Number: {}, Loss: {:.6f}\n'.format(layer_num, loss))
-
-def accuracy_individual_classes(classes,test_set):
-    class_correct = list(0. for i in range(len(classes)))
-    class_total = list(0. for i in range(len(classes)))
-    for data in test_set:
-        images, labels = data
-        outputs = network(images)
-        _, predicted = torch.max(outputs[0], 1)
-        correct = (predicted == labels).squeeze()
-        for i in range(len(labels)):
-            label = labels[i]
-            class_correct[label] += correct[i].item()
-            class_total[label] += 1
-    for i in range(len(classes)):
-        print('Accuracy of %s : %2d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
-
-def saving_textfile(file,pandas_true):
-    filename = input('Enter filename: \n')
-    directory = input('Enter a directory: \n')
-    if pandas_true == False:
-        f = open(str(directory)+'\\'+str(filename),'w+')
-        for line in file:
-            f.writelines(str(list(line.numpy())))
-        f.close()
-    else:
-        file.to_csv(str(directory)+'\\'+str(filename),'w+')
-
-def weights_biases():
-    parameters = {}
-    for i in network.named_parameters():
-        parameters[i[0]] = i[1] 
-    specific_parameters = parameters.keys()
-    while(True):
-        print('The weights and biases of these layers have been identified: \n')
-        for j in specific_parameters:
-            print(j)
-        print('\n')
-        wanted_parameter = input('Please enter the wanted parameter or enter 0 to exit. Press E to export a specific parameter. \n')
-        print('\n')
-        if wanted_parameter == '0':
-            break
-        elif wanted_parameter == 'E' or wanted_parameter == 'e':
-            wanted_parameter = input('Please enter the parameter to export: \n')
-            data = parameters[str(wanted_parameter)].detach()
-            saving_textfile(data,False)
-            break
-        else:
-            ith_node = input('Enter the node number: \n')
-            while(True):
-                ith_weight_ith_node, end = input('Enter the input weights: \n').split()
-                if end == 'x':
-                    break
-                else:
-                    print('\n')
-                    print(parameters[wanted_parameter][int(ith_node)][int(ith_weight_ith_node):int(end)].detach())
-                    print('\n')
-    print('Closed.')
-
