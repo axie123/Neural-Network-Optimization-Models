@@ -1,6 +1,6 @@
 #!/usr/bin/env python 
 # Originally written by Dr. Pascal Frederich. I modified it to fit my neural network model.
-
+# From the Aspuru-Guzik Group, University of Toronto.
 
 import os, sys
 import glob, copy
