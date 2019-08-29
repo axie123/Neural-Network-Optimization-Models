@@ -139,7 +139,7 @@ for i in range(6):
 
 
 # Saves the state of the neural network for continuous training.
-cont_network = NN()
+cont_network = NN(hparams)
 cont_optimizer = th.optim.SGD(network.parameters(), lr=learning_rate,momentum=momentum)
 
 network_state_dict = th.load(r'C:\Users\Andy Xie\Documents\Work\Research\Vector Institute 2018-2019\model.pth')
