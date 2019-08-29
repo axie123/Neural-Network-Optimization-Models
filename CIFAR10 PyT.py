@@ -12,7 +12,6 @@ import numpy as np
 
 # Loading the data =========================================================================================================================================
 
-
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]) # This function transforms the image into a tensor, and normalizes it to (0.5 * 3,) mean and the same std.
 
 train_set = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
@@ -23,9 +22,7 @@ test_load = torch.utils.data.DataLoader(test_set, batch_size = 1000, shuffle = F
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-
 # Displaying the image =====================================================================================================================================
-
 
 dataiter = enumerate(test_load)
 idx, (data, truth) = next(dataiter)
@@ -40,9 +37,7 @@ for i in range(0,6):
     plt.imshow(np.transpose(npimg)) 
 plt.show()
 
-
-# The neural network =======================================================================================================================================
-
+# The neural networks =======================================================================================================================================
 
 class NN(nn.Module):
 
@@ -101,9 +96,7 @@ class Net(nn.Module):
 
 net = NN()
 
-
 # Training and Testing =====================================================================================================================================
-
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr = 0.001, momentum = 0.9) # Stochastic GD
@@ -148,7 +141,6 @@ for i in range(1,2):
     train(i)
     test()
 
-
 # Evaluating performance ===================================================================================================================================
 
 dataiter = enumerate(test_load)
@@ -163,10 +155,6 @@ for i in range(0,6):
     plt.imshow(np.transpose(npimg,(1,2,0))) 
     plt.title("Ground Truth: {}".format(classes[labels[i]]))
 plt.show()
-
-outputs = net(images)
-_, predicted = torch.max(outputs, 1)
-print('Predicted: ', ' '.join('%5s' % classes[predicted[j]] for j in range(6)))
 
 # Predicts of NN on whole dataset ==========================================================================================================================
 
@@ -184,7 +172,6 @@ print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct
 
 # Looking at the individual classes ========================================================================================================================
 
-
 class_correct = list(0. for i in range(10))
 class_total = list(0. for i in range(10))
 with torch.no_grad(): # Sets all data to not require a gradient.
@@ -197,7 +184,6 @@ with torch.no_grad(): # Sets all data to not require a gradient.
             label = labels[i] # Get the label from the one of the four images.
             class_correct[label] += c[i].item() # Adds a 1 if it's correctly predicted and a 0 if not. (Images from the c batch)
             class_total[label] += 1 # Sets the total to 100.
-
 
 for i in range(10):
     print('Accuracy of %5s : %2d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
