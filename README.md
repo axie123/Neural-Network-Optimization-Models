@@ -10,12 +10,13 @@ Each of the projects are already in their compartment folders. To test out a pro
 
 ## Usage/Running 
 
+The code for Bayesian optimization is developed on Linux.
+
 It's simple. Just:
 
 ```bash
-python program_name.py
+python3 program_name.py
 ```
-on the PyCharm or OS terminal to run.
 
 ### Prerequisites
 
@@ -25,9 +26,11 @@ Numpy - A data science and scientific computing library. Source: https://numpy.o
 
 Matplotlib - A graph visualization library. Source: https://matplotlib.org/users/installing.html
 
-PyTorch - 
+PyTorch - A machine learning library developed my Facebook AI. Source: https://pytorch.org/
 
-SciKit-Learn - 
+SciKit-Learn - A machine learning library that is used to split and encode data. Source: https://scikit-learn.org/stable/install.html
+
+Watchdog - Python API and shell utilities to monitor file system events. Source: https://pypi.org/project/watchdog/#description
 
 ### For more information: 
 
